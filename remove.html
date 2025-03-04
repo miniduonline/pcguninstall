@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sorry to See You Go - PCGuide.lk Extension</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f0f2f5, #e0e3e8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+    }
+    
+    .container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      max-width: 650px;
+      width: 90%;
+      text-align: center;
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .logo {
+      margin-bottom: 20px;
+      animation: float 3s ease-in-out infinite;
+      filter: grayscale(35%);
+      opacity: 0.9;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    
+    .logo img {
+      width: 140px;
+      filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+    }
+    
+    .sad-icon {
+      margin: 0 auto 25px;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(66, 133, 244, 0.1);
+      border-radius: 50%;
+      color: #4285f4;
+      font-size: 36px;
+    }
+    
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      font-size: 1.05rem;
+    }
+    
+    .reason-section {
+      margin: 30px 0;
+    }
+    
+    form {
+      text-align: left;
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #444;
+    }
+    
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+    
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .checkbox-item input {
+      margin-right: 10px;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+    
+    .checkbox-item label {
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    
+    textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      min-height: 120px;
+      resize: vertical;
+      transition: border-color 0.3s;
+    }
+    
+    textarea:focus {
+      outline: none;
+      border-color: #4285f4;
+    }
+    
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #4285f4, #3367d6);
+      color: white;
+      box-shadow: 0 4px 12px rgba(66, 133, 244, 0.25);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(66, 133, 244, 0.35);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: #4285f4;
+      border: 1px solid #4285f4;
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(66, 133, 244, 0.1);
+    }
+    
+    .footer {
+      margin-top: 25px;
+      font-size: 0.85rem;
+      color: #888;
+    }
+    
+    .footer a {
+      color: #4285f4;
+      text-decoration: none;
+    }
+    
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 580px) {
+      .checkbox-group {
+        grid-template-columns: 1fr;
+      }
+      
+      .btn-group {
+        flex-direction: column;
+      }
+      
+      .container {
+        padding: 30px 25px;
+      }
+    }
+    
+    .success-message {
+      display: none;
+      background: #e6f4ea;
+      color: #34a853;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      font-weight: 500;
+      animation: fadeIn 0.5s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="icons/pcguide-logo-B.svg" alt="PCGuide Logo" />
+    </div>
+    
+    <!-- Sad Face Icon -->
+    <div class="sad-icon">
+      <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M8 15h8"></path>
+        <path d="M9 9h.01"></path>
+        <path d="M15 9h.01"></path>
+      </svg>
+    </div>
+    
+    <!-- Main Content -->
+    <h1>Sorry to See You Go</h1>
+    <p>We're sad to see you uninstall the PCGuide.lk Extension. Your feedback helps us improve our product. Could you take a moment to let us know why you decided to uninstall?</p>
+    
+    <!-- Success Message (Hidden by Default) -->
+    <div class="success-message" id="success-message">
+      Thank you for your feedback! We appreciate your input and will use it to improve our extension.
+    </div>
+    
+    <!-- Feedback Form -->
+    <div class="reason-section">
+      <form id="feedback-form" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="730d5f2b-8f44-4e96-9843-212c664a8634">
+        <input type="hidden" name="subject" value="PCGuide.lk Extension Uninstall Feedback">
+        
+        <div class="input-group">
+          <label>What made you uninstall our extension?</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="reason1" name="reason" value="Not useful">
+              <label for="reason1">Not useful for me</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="reason2" name="reason" value="Performance issues">
+              <label for="reason2">Slowed down my browser</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="reason3" name="reason" value="Too many notifications">
+              <label for="reason3">Too many notifications</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="reason4" name="reason" value="Buggy experience">
+              <label for="reason4">Found bugs or errors</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="reason5" name="reason" value="Not enough updates">
+              <label for="reason5">Not enough updates</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="reason6" name="reason" value="Found alternative">
+              <label for="reason6">Found better alternative</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label for="feedback">Do you have any suggestions on how we could improve?</label>
+          <textarea id="feedback" name="feedback" placeholder="Your feedback helps us make PCGuide.lk better..."></textarea>
+        </div>
+        
+        <div class="input-group">
+          <label for="email">Email (optional)</label>
+          <textarea id="email" name="email" placeholder="Your email if you'd like us to contact you" style="min-height: 45px"></textarea>
+        </div>
+        
+        <input type="hidden" name="redirect" value="false">
+        <input type="hidden" name="from_name" value="PCGuide.lk Uninstall Form">
+        
+        <div class="btn-group">
+          <button type="submit" class="btn btn-primary">Submit Feedback</button>
+          <a href="https://pcguide.lk" class="btn btn-secondary">Visit Website</a>
+        </div>
+      </form>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+      <p>Changed your mind? <a href="https://chrome.google.com/webstore/detail/pcguidelk-extension/[YOUR-EXTENSION-ID]">Reinstall PCGuide.lk Extension</a></p>
+      <p>© 2025 PCGuide.lk. All rights reserved.</p>
+    </div>
+  </div>
+  <script>
+    
+    // Form submission handling with Web3Forms
+    const form = document.getElementById('feedback-form');
+    const successMessage = document.getElementById('success-message');
+    
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      const object = {};
+      
+      // Convert checkboxes to array
+      const checkedReasons = [];
+      document.querySelectorAll('input[name="reason"]:checked').forEach((checkbox) => {
+        checkedReasons.push(checkbox.value);
+      });
+      
+      // Add checkbox values as a string
+      if (checkedReasons.length > 0) {
+        object.reasons = checkedReasons.join(', ');
+      }
+      
+      formData.forEach((value, key) => {
+        if (key !== 'reason') { // Skip individual checkboxes since we handled them above
+          object[key] = value;
+        }
+      });
+      
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(object)
+      })
+      .then(async (response) => {
+        if (response.status === 200) {
+          // Show success message
+          successMessage.style.display = 'block';
+          
+          // Hide the form
+          form.style.display = 'none';
+          
+          // Scroll to success message
+          successMessage.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          const text = await response.text();
+          throw new Error(text);
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert('Something went wrong. Please try again later.');
+      });
+    });
+
+  </script>
+
+</body>
+</html>
